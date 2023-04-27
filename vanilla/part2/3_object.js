@@ -7,7 +7,7 @@ const plyerFat = "little bit";
 // 후 better
 
 const player = {
-    name: "nico",
+    name: "nico", // property
     points: 10,
     fat: true
 };
