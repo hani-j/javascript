@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Momentum App</title>
+</head>
+<body>
+    <!-- 
+        form 안에서 엔터를 누르고 
+        더이상 input 존재하지 않는다면 
+        자동으로 submit 됨
+
+        submit 할 때마다 전체 새로고침
+    -->
+    <form id="login-form">
+        <input 
+        required maxlength="15"
+        type="text" placeholder="What is your name?">
+        <!-- <button>Log In</button> -->
+        <input type="submit" value="Log In">
+    </form>
+    <script src="app.js"></script>
+</body>
+</html>
