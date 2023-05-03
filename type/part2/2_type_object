@@ -1,0 +1,38 @@
+// const player :object {}   Error
+const playerNico : {
+    name:string,
+    age?:number
+} = {
+    name:"nico"
+}
+// age? -> number | undefined
+
+
+// object 를 여러번 쓸 경우 => alias type
+type Player = {
+    name:string,
+    age?:number
+}
+
+const nico : Player = {
+    name:"nico"
+}
+const lynn : Player = {
+    name: "lynn",
+    age:12
+}
+
+
+// player 을 반환 하는 경우
+
+// 방법1
+function playerMaker(name:string) : Player{
+    return {
+        name
+    }
+}
+// 방법2
+const playerMaker2 = (name:string) : Player => ({name})
+
+const nico2 = playerMaker2("nico");
+nico2.age = 12

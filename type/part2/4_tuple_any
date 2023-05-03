@@ -1,0 +1,9 @@
+// Tuple : array 최소한의 길이를 가지고, 특정 위치에 특정 타입이 있어야 함
+const player:readonly [string, number, boolean] = ["nico", 1, true]
+// player[0] = 1  Error
+
+// any : 다 됨. 타입스크립트를 빠져나오는 것
+
+const a : any[] = [1, 2, 3, 4]
+const b : any = true
+a + b
