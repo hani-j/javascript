@@ -1,0 +1,45 @@
+// overoding
+// multiple signatures 을 가질 때
+
+// 다른 타입을 받는 경우
+type Add2 = {
+    (a: number, b: number) : number
+    (a: number, b: string) : number
+
+}
+
+// const add2: Add2 = (a, b) => a + b    Error
+const add2: Add2 = (a, b) => {
+    if (typeof b === "string") return a
+    return a + b
+}
+
+type Config = {
+    path: string,
+    state: object
+}
+
+type Push = {
+    (path:string):void
+    (config: Config):void
+}
+
+const push:Push = (config) => {
+    if (typeof config === "string") { console.log(config) }
+    else {
+        console.log(config.path)
+    }
+}
+
+
+
+// 파라미터 개수가 다른 경우
+type Add22 = {
+    (a: number, b: number) : number
+    (a: number, b: number, c:number) : number
+}
+// c? : optional 
+const add22:Add22 = (a, b, c?:number) => {
+    if(c) return a + b + c
+    return a + b
+}

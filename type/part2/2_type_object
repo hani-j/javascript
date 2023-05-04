@@ -25,13 +25,13 @@ const lynn : Player = {
 
 // player 을 반환 하는 경우
 
-// 방법1
+// 방법1       함수이름 (매개변수) : 반환타입
 function playerMaker(name:string) : Player{
     return {
         name
     }
 }
-// 방법2
+// 방법2              ()함수         : 반환타입      리턴값
 const playerMaker2 = (name:string) : Player => ({name})
 
 const nico2 = playerMaker2("nico");

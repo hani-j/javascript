@@ -1,0 +1,35 @@
+function superPrint<V>(a: V[]){
+    return a[0]
+}
+
+type Player<E> = {
+    name:string
+    extraInfo:E
+}
+
+type NicoExtra = {
+    favFood:string
+}
+
+type NicoPlayer = Player<NicoExtra>
+
+const nico: NicoPlayer = {
+    name: "nico"
+    extraInfo: {
+        favFood:"kimchi"
+    }
+}
+
+const lynn: Player<null> = {
+    name: "lynn"
+    extraInfo:null
+}
+
+type a = Array<number>
+
+let a:A = [1, 2, 3, 4]
+
+// function printAllNumbers(arr: number[])
+function printAllNumbers(arr: Array<number>) {
+    
+}

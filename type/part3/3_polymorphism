@@ -1,0 +1,25 @@
+// polymorphism 다형성
+
+// concrete type : nubmer boolean string ..
+type SuperPrint = {
+    <TypePlaceholder>(arr: TypePlaceholder[]):TypePlaceholder
+    <T>(arr: T[]):T
+    // (arr: number[]):void
+    // (arr: Boolean[]):void
+    // (arr: string[]):void
+    // (arr: (Boolean | number)[]):void
+    // 모든 유형을 넣어줘야 할까?
+    // => generic 을 이용 => T
+}
+// ===
+// type SuperPrint = <T>(arr: T[]) => T
+// Generic : 원하는 대로 call signatures 를 만들어줌
+
+const superPrint: SuperPrint = (arr) => arr[0]
+
+const a = superPrint([1, 2, 3, 4])
+const b = superPrint([true, false, true])
+const c = superPrint(["a", "b", "c"])
+const d = superPrint([1, 2, true, false])
+
+type superPrint2 = <T, M>(a:T[], b:M) => T

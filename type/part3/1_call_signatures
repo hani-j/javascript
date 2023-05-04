@@ -1,9 +1,15 @@
 // call signatures
 // 마우스를 올렸을 때 보이는 것
+// 함수를 어떻게  호출해야하는지, 반환값은 무엇인지
+const add = (a:number, b:number) => a + b
+
 type Add = (a:number, b:number) => number;
 
-const add:Add = (a, b) => a + b
+const add1:Add = (a, b) => a + b
+// const add2:Add = (a, b) => {a + b}  : void
+
+
 
 // 다형성 polymorphism
-
+// overoding
 // 제네릭 generic
