@@ -16,7 +16,7 @@ function handleLinkClick(event) {
     alert("clicked!");
 }
 
-loginForm.addEventListener("submit", onLoginSubmit)
+loginForm.addEventListener("submit", onLoginSubmit);
 link.addEventListener("click", handleLinkClick);
 
 // EvetListener 의 함수는 브라우저가 실행하는 것
