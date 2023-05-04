@@ -1,0 +1,26 @@
+//abstract
+// 추상클래스 안에서 추상메서드를 만들 수 있음
+// 메소드를 구현하면 안됨 call signature 만 적어야 함
+abstract class User {
+    constructor(
+        protected firstName:string,
+        protected lastName:string,
+        protected nickname:string
+    ) {}
+    abstract getNickName():void
+    getFullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+
+class Player extends User {
+    getNickName() {
+        console.log(this.nickname)
+    }
+}
+
+// abstract 는 instance 로 만들 수 없음
+const nico = new Player("nico", "las", "니꼬");
+
+nico.getFullName();
+// nico.firstName   Error
