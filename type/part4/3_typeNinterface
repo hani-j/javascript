@@ -1,0 +1,52 @@
+/* 
+abstract class User {
+    constructor(
+        protected firstName:string,
+        protected lastName:string
+    ) {}
+    abstract sayHi(name:string):string
+    abstract fullName():string
+}
+// new User()  Error
+
+class Player extends User {
+    fullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+    sayHi(name:string) {
+        return `Hello ${name}. My name is ${this.fullName()}
+    }
+}
+*/
+
+// interface class 모양을 보여줌
+// javascript 에서 보이지 않음
+// constrcutor 못씀
+interface User {
+    firstName:string, 
+    lastName:string
+    sayHi(name:string):string
+    fullName():string
+}
+interface Human {
+    health:number
+}
+
+// implements typescript 에서만 있음
+// 추상 클래스를 추가로 사용하지 않음 파일 사이즈 작아짐
+// 하지만, private 사용하지 못함
+class Player implements User {
+    constructor(
+        public firstName:string, // private 안됨
+        public lastNamestring,
+        public health:number
+    ){}
+    fullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+    sayHi(name:string) {
+        return `Hello ${name}. My name is ${this.fullName()}
+    }
+}
+
+
