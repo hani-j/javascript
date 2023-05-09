@@ -1,0 +1,56 @@
+// abstract vs interface
+// 둘다 모양을 강제하도록 하하지지만 
+// interface 는 자바스크립트에 나타나지 않음. 더 선호
+
+// type
+// 1. 오브젝트의 모양 설명
+// 2. type alias 를 만드는 것
+// 3. type 을 특정된 값으로 만드는 것 = ""
+
+type PlayerA = {
+    name : string
+}
+// 상속하려면
+type PlayerAA = PlayerA & {
+    lastName:string
+}
+const playerA:PlayerAA = {
+    name:"nico",
+    lastName:"xxx"
+}
+// type 중복 정의 불가
+
+// interface PlayerB {
+//     name:string
+
+// }
+// interface PlayerBB extends PlayerB {
+//     lastName:string
+// }
+// interface PlaysrBB {
+//     health:number
+// }
+interface PlayerB {
+    name:string
+
+}
+interface PlayerB {
+    lastName:string
+}
+interface PlayerB {
+    health:number
+}
+const playerB:PlayerB = {
+    name:"nico",
+    lastName:"xxx",
+    health:1
+}
+
+// type 과 interface
+// 둘 다 object 의 모양과 타입을 알려주는 것이 목표
+
+// but. 허용한 것이 다름
+// type : 중복 정의 불가 interface : 중복 정의 가능
+
+// abstract
+// type, interface 대신 쓸 수 잆음

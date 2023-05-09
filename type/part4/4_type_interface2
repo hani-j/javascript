@@ -1,0 +1,22 @@
+type PlayerA = {
+    firstName:string
+}
+
+interface PlayerB {
+    firstName:string
+}
+
+// PlayerA PlayerB 둘 다 가능
+class User implements PlayerA {
+    constructor (
+        public firstName:string
+    ) {}
+}
+
+// 둘 다 abstract 대체 가능
+
+
+// class 나 object 의 모양을 정의하고 싶으면 ==>   interface
+// 다른 모든 경우에는                      ==>   type
+// 이유 : interface 를 상속시키는 방법이 직관적이어서
+//       적기만 하면 수많은 interface 정의를 합칠 수 있음
