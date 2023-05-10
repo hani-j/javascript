@@ -6,6 +6,7 @@
         "outDir": "build",
         "target": "ES6", // 어떤 버전으로 컴파일 할지
         "lib": ["ES6", "DOM"], // 자동 완성 기능
-        "strict": true  // 보호
+        "strict": true,  // 보호
+        "allowJs": true
     }
 }
