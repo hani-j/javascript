@@ -1,26 +1,15 @@
-// socket : 서버로의 연결
-const socket = new WebSocket(`ws://${window.location.host}`);
-const messageList = document.querySelector("ul");
-const messageForm = document.querySelector("form");
+/* SocketIO 이용한 버전 */
 
-socket.addEventListener("open", () => {
-    console.log("Connected to Server ✅");
-});
+const socket = io();
 
-socket.addEventListener("message", (message) => {
-    console.log("New message: ", message.data);
-});
+const welcome = document.getElementById("welcome")
+const form = welcome.querySelector("form");
 
-socket.addEventListener("close", () => {
-    console.log("Disconnected to Server ❌");
-});
-
-
-function handleSubmit() {
+function handleRoomSubmit(event) {
     event.preventDefault();
-    const input = messageForm.querySelector("input");
-    socket.send(input.value);
-    input.value = "";
+    const input = form.querySelector("input");
+    socket.emit("enter_room", { payload: input.value });
+    input.value = ""
 }
 
-messageForm.addEventListener("submit", handleSubmit);
+form.addEventListener("submit", handleRoomSubmit);
