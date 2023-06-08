@@ -1,7 +1,7 @@
 /*  SocketIO 이용한 버전 */
 
 import http from "http";
-import SocketIO from "socket.io";
+import { Server } from "socket.io";
 import express from "express";
 
 const app = express();
@@ -19,9 +19,26 @@ const httpServer = http.createServer(app);
 /* backend socket 설정 */
 /* frontend socket 설정 => const socket = io(); */
 // localhost:3000/socket.io/socket.io.js 를 제공
-const wsServer = SocketIO(httpServer);
+const wsServer = new Server(httpServer);
+// const wsServer = SocketIO(httpServer);
 wsServer.on("connection", socket => {
-    socket.on("enter_room", (msg) => console.log(msg));
+    socket["nickname"] = "Anon";
+    socket.onAny((event) => {
+        console.log(`Socket Event: ${event}`);
+    });
+    socket.on("enter_room", (roomName, done) => {
+        socket.join(roomName);
+        done();
+        socket.to(roomName).emit("welcome", socket.nickname); 
+    }); 
+    socket.on("disconnecting", () => {
+        socket.rooms.forEach(room => socket.to(room).emit("bye", socket.nickname));
+    });
+    socket.on("new_message", (msg, room, done) => {
+        socket.to(room).emit("new_message", `${socket.nickname}: ${msg}`);
+        done();
+    });
+    socket.on("nickname", nickname => socket["nickname"] = nickname)
 });
 
 
