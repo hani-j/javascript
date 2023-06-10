@@ -44,9 +44,13 @@ wsServer.on("connection", socket => {
         socket.join(roomName);
         done();
         socket.to(roomName).emit("welcome", socket.nickname); 
+        wsServer.sockets.emit("room_change", publicRooms());
     }); 
     socket.on("disconnecting", () => {
         socket.rooms.forEach(room => socket.to(room).emit("bye", socket.nickname));
+    });
+    socket.on("disconnect", () => {
+        wsServer.sockets.emit("room_change", publicRooms());
     });
     socket.on("new_message", (msg, room, done) => {
         socket.to(room).emit("new_message", `${socket.nickname}: ${msg}`);
@@ -61,5 +65,5 @@ const handleListen = () => console.log('Listening on http://localhost:3000');
 httpServer.listen(3000, handleListen);
 
 // Adaptor
-// 1. room ID 를 볼 수 있음
+// 1. room ID 를 볼 수 있음  
 // 2. socket ID 를 볼 수 있음
