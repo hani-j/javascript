@@ -3,6 +3,7 @@
 import http from "http";
 import { Server } from "socket.io";
 import express from "express";
+import { instrument } from "@socket.io/admin-ui";
 import { spawnSync } from "child_process";
 
 const app = express();
@@ -21,7 +22,16 @@ const httpServer = http.createServer(app);
 // localhost:3000/socket.io/socket.io.js 를 제공
 
 /* backend socket 설정 */
-const wsServer = new Server(httpServer);
+const wsServer = new Server(httpServer, {
+    cors: {
+        origin: ["https://admin.socket.io"],
+        credentials: true,
+    },
+});
+
+instrument(wsServer, {
+    auth: false,
+})
 // const wsServer = SocketIO(httpServer); 이전 버전
 
 function publicRooms() {
@@ -35,6 +45,11 @@ function publicRooms() {
     });
     return publicRooms;
 }
+
+function countRoom(roomName) {
+    return wsServer.sockets.adapter.rooms.get(roomName)?.size;
+}
+
 wsServer.on("connection", socket => {
     socket["nickname"] = "Anon";
     socket.onAny((event) => {
@@ -43,11 +58,11 @@ wsServer.on("connection", socket => {
     socket.on("enter_room", (roomName, done) => {
         socket.join(roomName);
         done();
-        socket.to(roomName).emit("welcome", socket.nickname); 
+        socket.to(roomName).emit("welcome", socket.nickname, countRoom(roomName)); 
         wsServer.sockets.emit("room_change", publicRooms());
     }); 
     socket.on("disconnecting", () => {
-        socket.rooms.forEach(room => socket.to(room).emit("bye", socket.nickname));
+        socket.rooms.forEach(room => socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1));
     });
     socket.on("disconnect", () => {
         wsServer.sockets.emit("room_change", publicRooms());
@@ -56,10 +71,10 @@ wsServer.on("connection", socket => {
         socket.to(room).emit("new_message", `${socket.nickname}: ${msg}`);
         done();
     });
-    socket.on("nickname", nickname => {
+    socket.on("nickname", (nickname, done) => {
         socket["nickname"] = nickname;
         done();
-    })
+    });
 });
 
 

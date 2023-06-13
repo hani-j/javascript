@@ -15,6 +15,7 @@ html(lang="en")
                     input(placeholder="nickname", required, type="text")
                     button Save
             div#welcome
+                h3
                 form
                     input(placeholder="room name", required, type="text")
                     button Enter Room
@@ -27,7 +28,6 @@ html(lang="en")
                     input(placeholder="message", required, type="text")
                     button Send
 
-        
         scrjpt(src="/socket.io/socket.io.js")
         script(src="https://cdn.socket.io/4.6.2/socket.io.min.js")
         script(src="/public/js/app.js")
