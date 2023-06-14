@@ -2,6 +2,23 @@
 
 const socket = io();
 
+const myFace = document.getElementById("myFace");
+
+let myStream;
+
+async function getMedia() {
+    try {
+        myStream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+            video: true,
+        })
+        myFace.srcObject = myStream;
+    } catch(e) {
+        console.log(e);
+    } 
+}
+getMedia();
+
 const nick = document.getElementById("nick");
 const nameForm = nick.querySelector("#name");
 const welcome = document.getElementById("welcome");
